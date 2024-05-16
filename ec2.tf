@@ -1,17 +1,17 @@
 # configured aws provider with proper credentials
 provider "aws" {
   region  = "us-east-1"
-  profile = "terraform-user"
+  profile = "DevOps"
 }
 
 
 # store the terraform state file in s3
 terraform {
   backend "s3" {
-    bucket  = "aosnote-terraform-state-bucket"
+    bucket  = "cdk-hnb659fds-assets-844006913217-us-east-1"
     key     = "build/terraform.tfstate"
     region  = "us-east-1"
-    profile = "terraform-user"
+    profile = "DevOps"
   }
 }
 
@@ -31,7 +31,7 @@ data "aws_availability_zones" "available_zones" {}
 
 # create default subnet if one does not exit
 resource "aws_default_subnet" "default_az1" {
-  availability_zone = data.aws_availability_zones.available_zones.names[0]
+  availability_zone = data.aws_availability_zones.available_zones.names[1]
 
   tags = {
     Name = "default subnet"
